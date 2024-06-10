@@ -14,8 +14,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping("/")
-    public String getHomePage(Model model){
-        return "index";
+    @RequestMapping("/admin/user")
+    public String getUserPage(Model model) {
+        return "admin/user/create";
     }
 }
