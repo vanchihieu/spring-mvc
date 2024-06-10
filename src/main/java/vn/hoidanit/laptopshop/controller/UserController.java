@@ -2,6 +2,7 @@ package vn.hoidanit.laptopshop.controller;
 
 import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import vn.hoidanit.laptopshop.serivce.UserService;
 
@@ -14,7 +15,7 @@ public class UserController {
     }
 
     @RequestMapping("/")
-    public String getHomePage(){
+    public String getHomePage(Model model){
         return "index";
     }
 }
