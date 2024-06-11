@@ -23,9 +23,7 @@ public class UserService {
     }
 
     public User handleSaveUser(User user) {
-        User hieu = this.userRepository.save(user);
-        System.out.println(hieu);
-        return hieu;
+        return this.userRepository.save(user);
     }
 
     public User getUserById(Long id) {

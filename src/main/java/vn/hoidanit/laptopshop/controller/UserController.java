@@ -2,10 +2,7 @@ package vn.hoidanit.laptopshop.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import vn.hoidanit.laptopshop.domain.User;
 import vn.hoidanit.laptopshop.serivce.UserService;
 
@@ -13,7 +10,7 @@ import java.util.List;
 
 @Controller
 public class UserController {
-   private final UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -39,7 +36,7 @@ public class UserController {
     public String getUserDetailPage(Model model, @PathVariable long id) {
         User user = this.userService.getUserById(id);
         model.addAttribute("user", user);
-        model.addAttribute("id",id);
+        model.addAttribute("id", id);
         return "admin/user/show";
     }
 
@@ -54,4 +51,24 @@ public class UserController {
         this.userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
+
+    @RequestMapping("/admin/user/{id}/edit") // GET
+    public String getUpdateUserPage(Model model, @PathVariable long id) {
+        User currentUser = this.userService.getUserById(id);
+        model.addAttribute("newUser", currentUser);
+        return "admin/user/update";
+    }
+
+    @PostMapping("/admin/user/update") // POST
+    public String getUpdateUserPage(Model model, @ModelAttribute("newUser") User user) {
+        User currentUser = this.userService.getUserById(user.getId());
+        if(currentUser != null) {
+            currentUser.setFullName(user.getFullName());
+            currentUser.setAddress(user.getAddress());
+            currentUser.setPhone(user.getPhone());
+            this.userService.handleSaveUser(currentUser);
+        }
+        return "redirect:/admin/user";
+    }
+
 }
