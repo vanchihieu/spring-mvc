@@ -28,23 +28,27 @@
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                     <li class="breadcrumb-item active">Users</li>
                 </ol>
-                <div class="container mt-5">
+                <div class="mt-5">
                     <div class="row">
-                        <div class="col-md-6 col-12 mx-auto">
-                            <h3>Delete the user with id ${id}</h3>
-
-                            <div class="alert alert-danger" role="alert">
-                                Are you sure to delete the user?
+                        <div class="col-12 mx-auto w-45 ">
+                            <div class="d-flex justify-content-center">
+                                <h3>User detail with id = ${id}</h3>
                             </div>
-                            <form:form action="/admin/user/delete" method="post"  modelAttribute="newUser">
-                                <div class="mb-3" style="display: none">
-                                    <label class="form-label">Id:</label>
-                                    <form:input type="text" class="form-control" path="id"/>
+                            <div class="card mx-auto" style="width: 50%;">
+                                <div class="card-header">
+                                    User information
                                 </div>
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                                <a href="/admin/user" class="btn btn-secondary">Cancel</a>
-                            </form:form>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">ID: ${user.id}</li>
+                                    <li class="list-group-item">Email: ${user.email}</li>
+                                    <li class="list-group-item">Fullname: ${user.fullName}</li>
+                                    <li class="list-group-item">Address: ${user.address}</li>
+
+                                </ul>
+                            </div>
+                            <div class="mt-2 d-flex justify-content-center">
+                                <button class="btn btn-primary " onclick="window.location.href='/admin/user'">Back to list</button>
+                            </div>
                         </div>
 
                     </div>

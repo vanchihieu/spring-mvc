@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="/admin">Laptopshop</a>
