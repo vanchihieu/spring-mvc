@@ -2,6 +2,8 @@ package vn.hoidanit.laptopshop.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "products")
 public class Product {
@@ -18,6 +20,7 @@ public class Product {
     private long sold;
     private String factory;
     private String target;
+
 
     public long getId() {
         return id;
