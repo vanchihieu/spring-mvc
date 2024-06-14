@@ -1,7 +1,5 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
-import jakarta.servlet.ServletContext;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +17,7 @@ public class UserController {
     private final UploadService uploadService;
     private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService, ServletContext servletContext, UploadService uploadService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService,UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.uploadService = uploadService;
         this.passwordEncoder = passwordEncoder;
