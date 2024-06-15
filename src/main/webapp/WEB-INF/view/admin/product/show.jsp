@@ -55,9 +55,9 @@
                                                 <td>${product.price}</td>
                                                 <td>${product.factory}</td>
                                                 <td>
-                                                    <a href="/admin/user/${product.id}" class="btn btn-success">View</a>
-                                                    <a href="/admin/user/${product.id}/edit" class="btn btn-warning mx-2">Update</a>
-                                                    <a href="/admin/user/${product.id}/delete" class="btn btn-danger">Delete</a>
+                                                    <a href="/admin/product/${product.id}" class="btn btn-success">View</a>
+                                                    <a href="/admin/product/${product.id}/edit" class="btn btn-warning mx-2">Update</a>
+                                                    <a href="/admin/product/${product.id}/delete" class="btn btn-danger">Delete</a>
                                                 </td>
                                             </tr>
                                         </c:forEach>

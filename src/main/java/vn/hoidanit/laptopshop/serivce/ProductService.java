@@ -5,6 +5,7 @@ import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.repository.ProductRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -20,5 +21,13 @@ public class ProductService {
 
     public List<Product> getAllProducts() {
         return this.productRepository.findAll();
+    }
+
+    public Product getProductById(long id) {
+        return this.productRepository.findById(id).orElse(null);
+    }
+
+    public void deleteProductById(long id) {
+        this.productRepository.deleteById(id);
     }
 }
