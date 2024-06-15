@@ -58,12 +58,17 @@ public class UserController {
     @PostMapping(value = "/admin/user/create")
     public String createUser(Model model,
                              @ModelAttribute("newUser") @Valid User user,
-                             BindingResult bindingResult,
+                             BindingResult newUserBindingResult,
                              @RequestParam("chihieuFile") MultipartFile file
                              ) {
-        List<FieldError> errors = bindingResult.getFieldErrors();
-        for (FieldError error : errors ) {
-            System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+//        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+//        for (FieldError error : errors) {
+//            System.out.println(">>>>" + error.getField() + " - " + error.getDefaultMessage());
+//        }
+
+        // validate
+        if (newUserBindingResult.hasErrors()) {
+            return "admin/user/create";
         }
 
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
