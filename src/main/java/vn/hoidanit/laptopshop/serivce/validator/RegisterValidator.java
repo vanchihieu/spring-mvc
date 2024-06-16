@@ -2,11 +2,13 @@ package vn.hoidanit.laptopshop.serivce.validator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.springframework.stereotype.Service;
 import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
 import vn.hoidanit.laptopshop.serivce.UserService;
 
+@Service
 public class RegisterValidator implements ConstraintValidator<RegisterChecked, RegisterDTO> {
-    public final UserService userService;
+    private final UserService userService;
 
     public RegisterValidator(UserService userService) {
         this.userService = userService;
