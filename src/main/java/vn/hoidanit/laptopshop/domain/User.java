@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import vn.hoidanit.laptopshop.serivce.validator.StrongPassword;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class User {
     private String email;
     @NotNull
     @Size(min = 2, message = "Password phải có tối thiểu 2 ký tự")
+//    @StrongPassword(message = "Password phải dài 8 ký tự và kết hợp chữ hoa, chữ thường, số, ký tự đặc biệt.")
     private String password;
     @NotNull
     @Size(min = 3, message = "Fullname phải có tối thiểu 3 ký tự")
