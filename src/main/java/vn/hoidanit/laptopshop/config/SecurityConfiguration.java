@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import vn.hoidanit.laptopshop.serivce.CustomUserDetailsService;
 import vn.hoidanit.laptopshop.serivce.UserService;
 
@@ -44,17 +45,27 @@ public class SecurityConfiguration {
     }
 
     @Bean
+    public AuthenticationSuccessHandler customSuccessHandler(){
+        return new CustomSuccessHandler();
+    }
+
+    @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll() // FORWARD: là khi chuyển hướng sang view jsp nó sẽ cho phép truy cập, INCLUDE: là khi include 1 view jsp vào view khác nó sẽ cho phép truy cập (ví dụ: detail, footer)
-                        .requestMatchers("/", "/login", "/client/**", "/css/**", "/js/**",
+                        .requestMatchers("/", "/login", "/product/**" ,
+                                "/client/**", "/css/**", "/js/**",
                                 "/images/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN") // tại vì dùng hasRole("ADMIN") nên spring sẻ bỏ chữ ROLE
                         .anyRequest().authenticated())
+
+
 
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .failureUrl("/login?error")
+                        .successHandler(customSuccessHandler())
                         .permitAll());
 
         return http.build();
