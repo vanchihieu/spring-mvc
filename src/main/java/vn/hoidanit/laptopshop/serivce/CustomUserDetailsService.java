@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+ user.getRole().getName())));
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().getName())));
         //tại vì dùng hasRole("ADMIN") nên spring sẻ bỏ chữ ROLE, mà mặc định spring sẽ lưu trong context là ROLE_USER VÀ ROLE_ADMIN nên ta thêm "ROLE_"
     }
 }

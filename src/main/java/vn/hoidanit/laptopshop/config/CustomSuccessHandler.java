@@ -41,7 +41,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request, Authentication authentication) {
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false); // false: không tạo session mới nếu không có session nào tồn tại
         if (session == null) {
             return;
         }
@@ -54,6 +54,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         if(user != null){
             session.setAttribute("fullName", user.getFullName());
             session.setAttribute("avatar", user.getAvatar());
+            session.setAttribute("id", user.getId());
+            session.setAttribute("email", user.getEmail());
         }
     }
 
