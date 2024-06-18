@@ -46,6 +46,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        // handle logic when login success
         String targetUrl = determineTargetUrl(authentication);
 
         if (response.isCommitted()) {
