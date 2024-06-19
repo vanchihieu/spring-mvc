@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,7 +72,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="cartDetail" items="${cartDetails}">
+                <c:if test="${ empty cartDetails}">
+                    <tr>
+                        <td colspan="6">
+                            <div class="d-flex justify-content-center flex-column align-items-center mt-4">
+                                <p style="font-size: 20px">Không có sản phẩm trong giỏ hàng!</p>
+                                <img src="/client/img/no-product.png" style="width: 250px; height: 250px">
+                            </div>
+                        </td>
+
+                    </tr>
+                </c:if>
+                <c:forEach var="cartDetail" items="${cartDetails}" varStatus="status">
+
                     <tr>
                         <th scope="row">
                             <div class="d-flex align-items-center">
@@ -80,7 +94,7 @@
                             </div>
                         </th>
                         <td>
-                            <p class="mb-0 mt-4" >
+                            <p class="mb-0 mt-4">
                                 <a href="/product/${cartDetail.product.id}" target="_blank">
                                         ${cartDetail.product.name}
                                 </a>
@@ -94,7 +108,8 @@
                         <td>
                             <div class="input-group quantity mt-4" style="width: 100px;">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                    <button
+                                            class="btn btn-sm btn-minus rounded-circle bg-light border">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
@@ -102,9 +117,11 @@
                                        class="form-control form-control-sm text-center border-0"
                                        value="${cartDetail.quantity}"
                                        data-cart-detail-id="${cartDetail.id}"
-                                       data-cart-detail-price="${cartDetail.price}">
+                                       data-cart-detail-price="${cartDetail.price}"
+                                       data-cart-detail-index="${status.index}">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                    <button
+                                            class="btn btn-sm btn-plus rounded-circle bg-light border">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
@@ -112,71 +129,85 @@
                         </td>
                         <td>
                             <p class="mb-0 mt-4" data-cart-detail-id="${cartDetail.id}">
-                                <fmt:formatNumber type="number" value="${cartDetail.price * cartDetail.quantity}"/> đ
+                                <fmt:formatNumber type="number"
+                                                  value="${cartDetail.price * cartDetail.quantity}"/> đ
                             </p>
                         </td>
                         <td>
                             <form method="post" action="/delete-cart-product/${cartDetail.id}">
                                 <input type="hidden" name="${_csrf.parameterName}"
-                                       value="${_csrf.token}" />
+                                       value="${_csrf.token}"/>
                                 <button class="btn btn-md rounded-circle bg-light border mt-4">
                                     <i class="fa fa-times text-danger"></i>
                                 </button>
                             </form>
                         </td>
-
                     </tr>
                 </c:forEach>
+
                 </tbody>
             </table>
         </div>
-
-        <c:choose>
-            <c:when test="${empty cartDetails}">
-                <div class="d-flex justify-content-center flex-column align-items-center mt-4">
-                    <p style="font-size: 20px">Không có sản phẩm trong giỏ hàng!</p>
-                    <img src="/client/img/no-product.png" style="width: 250px; height: 250px">
-                </div>
-
-            </c:when>
-            <c:otherwise>
-                <div class="mt-5 row g-4 justify-content-start">
-                    <div class="col-12 col-md-8">
-                        <div class="bg-light rounded">
-                            <div class="p-4">
-                                <h1 class="display-6 mb-4">Thông Tin <span class="fw-normal">Đơn Hàng</span>
-                                </h1>
-                                <div class="d-flex justify-content-between mb-4">
-                                    <h5 class="mb-0 me-4">Tạm tính:</h5>
-                                    <p class="mb-0" data-cart-total-price="${totalPrice}">
-                                        <fmt:formatNumber type="number" value="${totalPrice}"/> đ
-                                    </p>
-                                </div>
-                                <div class=" d-flex justify-content-between">
-                                    <h5 class="mb-0 me-4">Phí vận chuyển</h5>
-                                    <div class="">
-                                        <p class="mb-0">0 đ</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
-                                <h5 class="mb-0 ps-4 me-4">Tổng số tiền</h5>
-                                <p class="mb-0 pe-4" data-cart-total-price="${totalPrice}">
+        <c:if test="${not empty cartDetails}">
+            <div class="mt-5 row g-4 justify-content-start">
+                <div class="col-12 col-md-8">
+                    <div class="bg-light rounded">
+                        <div class="p-4">
+                            <h1 class="display-6 mb-4">Thông Tin <span class="fw-normal">Đơn
+                                                        Hàng</span>
+                            </h1>
+                            <div class="d-flex justify-content-between mb-4">
+                                <h5 class="mb-0 me-4">Tạm tính:</h5>
+                                <p class="mb-0" data-cart-total-price="${totalPrice}">
                                     <fmt:formatNumber type="number" value="${totalPrice}"/> đ
                                 </p>
                             </div>
-                            <button
-                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                                    type="button">Xác nhận đặt hàng
-                            </button>
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mb-0 me-4">Phí vận chuyển</h5>
+                                <div class="">
+                                    <p class="mb-0">0 đ</p>
+                                </div>
+                            </div>
                         </div>
+                        <div
+                                class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                            <h5 class="mb-0 ps-4 me-4">Tổng số tiền</h5>
+                            <p class="mb-0 pe-4" data-cart-total-price="${totalPrice}">
+                                <fmt:formatNumber type="number" value="${totalPrice}"/> đ
+                            </p>
+                        </div>
+                        <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
+                            <input type="hidden" name="${_csrf.parameterName}"
+                                   value="${_csrf.token}"/>
+                            <div style="display: block;">
+                                <c:forEach var="cartDetail" items="${cart.cartDetails}"
+                                           varStatus="status">
+                                    <div class="mb-3">
+                                        <div class="form-group">
+                                            <label>Id:</label>
+                                            <form:input class="form-control" type="text"
+                                                        value="${cartDetail.id}"
+                                                        path="cartDetails[${status.index}].id"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Quantity:</label>
+                                            <form:input class="form-control" type="text"
+                                                        value="${cartDetail.quantity}"
+                                                        path="cartDetails[${status.index}].quantity"/>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                            <button
+                                    class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">
+                                Xác
+                                nhận thanh toán
+                            </button>
+                        </form:form>
                     </div>
                 </div>
-
-            </c:otherwise>
-        </c:choose>
-
-
+            </div>
+        </c:if>
     </div>
 </div>
 <!-- Cart Page End -->
