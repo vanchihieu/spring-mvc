@@ -80,7 +80,7 @@
                             </div>
                         </th>
                         <td>
-                            <p class="mb-0 mt-4">
+                            <p class="mb-0 mt-4" >
                                 <a href="/product/${cartDetail.product.id}" target="_blank">
                                         ${cartDetail.product.name}
                                 </a>
@@ -116,9 +116,13 @@
                             </p>
                         </td>
                         <td>
-                            <button class=" btn btn-md rounded-circle bg-light border mt-4">
-                            <i class="fa fa-times text-danger"></i>
-                            </button>
+                            <form method="post" action="/delete-cart-product/${cartDetail.id}">
+                                <input type="hidden" name="${_csrf.parameterName}"
+                                       value="${_csrf.token}" />
+                                <button class="btn btn-md rounded-circle bg-light border mt-4">
+                                    <i class="fa fa-times text-danger"></i>
+                                </button>
+                            </form>
                         </td>
 
                     </tr>
