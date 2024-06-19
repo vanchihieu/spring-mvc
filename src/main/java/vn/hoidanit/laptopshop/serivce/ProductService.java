@@ -2,6 +2,7 @@ package vn.hoidanit.laptopshop.serivce;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.Product;
@@ -88,5 +89,9 @@ public class ProductService {
             }
 
         }
+    }
+
+    public Cart getCartByUser(User user) {
+        return this.cartRepository.findByUser(user);
     }
 }
