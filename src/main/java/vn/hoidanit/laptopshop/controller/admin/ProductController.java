@@ -1,16 +1,14 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
 import jakarta.validation.Valid;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.hoidanit.laptopshop.domain.Product;
-import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.serivce.ProductService;
-import vn.hoidanit.laptopshop.serivce.UploadService;
+import vn.hoidanit.laptopshop.service.ProductService;
+import vn.hoidanit.laptopshop.service.UploadService;
 
 @Controller
 public class ProductController {

@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.serivce;
+package vn.hoidanit.laptopshop.service;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

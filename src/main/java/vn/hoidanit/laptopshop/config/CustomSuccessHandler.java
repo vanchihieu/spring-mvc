@@ -12,7 +12,7 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.serivce.UserService;
+import vn.hoidanit.laptopshop.service.UserService;
 
 import java.io.IOException;
 import java.util.Collection;

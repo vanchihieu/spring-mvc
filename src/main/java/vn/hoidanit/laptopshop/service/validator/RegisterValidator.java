@@ -1,10 +1,10 @@
-package vn.hoidanit.laptopshop.serivce.validator;
+package vn.hoidanit.laptopshop.service.validator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.stereotype.Service;
 import vn.hoidanit.laptopshop.domain.dto.RegisterDTO;
-import vn.hoidanit.laptopshop.serivce.UserService;
+import vn.hoidanit.laptopshop.service.UserService;
 
 @Service
 public class RegisterValidator implements ConstraintValidator<RegisterChecked, RegisterDTO> {

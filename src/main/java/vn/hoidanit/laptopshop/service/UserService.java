@@ -1,4 +1,4 @@
-package vn.hoidanit.laptopshop.serivce;
+package vn.hoidanit.laptopshop.service;
 
 import org.springframework.stereotype.Service;
 import vn.hoidanit.laptopshop.domain.Role;

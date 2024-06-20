@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +47,7 @@
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">ID: ${product.id}</li>
                                     <li class="list-group-item">Name: ${product.name}</li>
-                                    <li class="list-group-item">Price: ${product.price}</li>
+                                    <li class="list-group-item">Price: <fmt:formatNumber type="number" value="${product.price}" /> đ</li>
 
                                 </ul>
                             </div>

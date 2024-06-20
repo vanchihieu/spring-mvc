@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import vn.hoidanit.laptopshop.domain.Cart;
 import vn.hoidanit.laptopshop.domain.CartDetail;
 import vn.hoidanit.laptopshop.domain.User;
-import vn.hoidanit.laptopshop.serivce.ProductService;
+import vn.hoidanit.laptopshop.service.ProductService;
 
 import java.util.ArrayList;
 import java.util.List;
