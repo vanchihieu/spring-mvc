@@ -1,6 +1,9 @@
 package vn.hoidanit.laptopshop.controller.admin;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import vn.hoidanit.laptopshop.domain.Product;
 import vn.hoidanit.laptopshop.service.ProductService;
 import vn.hoidanit.laptopshop.service.UploadService;
+
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -21,8 +26,11 @@ public class ProductController {
     }
 
     @GetMapping("/admin/product")
-    public String getProduct(Model model) {
-        model.addAttribute("products", this.productService.getAllProducts());
+    public String getProduct(Model model, @RequestParam("page") int page) {
+        Pageable pageable = PageRequest.of(page - 1, 2);
+        Page<Product> product = this.productService.fetchProducts(pageable);
+        List<Product> productList = product.getContent();
+        model.addAttribute("products", productList);
         return "admin/product/show";
     }
 
@@ -78,7 +86,7 @@ public class ProductController {
 
         if (currentProduct != null) {
             // update new image
-            if(!file.isEmpty()) {
+            if (!file.isEmpty()) {
                 String avatar = this.uploadService.handleSaveUploadFile(file, "product");
                 currentProduct.setImage(avatar);
             }
