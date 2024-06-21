@@ -32,12 +32,12 @@ public class ProductService {
         return this.productRepository.save(product);
     }
 
-    public Page<Product> fetchProducts(Pageable page) {
-        return this.productRepository.findAll(page);
-    }
+//    public Page<Product> fetchProducts(Pageable page) {
+//        return this.productRepository.findAll(page);
+//    }
 
-    public List<Product> getAllProducts() {
-        return this.productRepository.findAll();
+    public Page<Product> getAllProducts(Pageable page) {
+        return this.productRepository.findAll(page);
     }
     public Product getProductById(long id) {
         return this.productRepository.findById(id).orElse(null);
