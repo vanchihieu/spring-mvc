@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import vn.hoidanit.laptopshop.domain.*;
 import vn.hoidanit.laptopshop.repository.*;
+import vn.hoidanit.laptopshop.service.specification.ProductSpecs;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,16 +34,12 @@ public class ProductService {
         return this.productRepository.save(product);
     }
 
-    private Specification<Product> nameLike(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME), "%" + name + "%");
-    }
-
-    public Page<Product> fetchProducts(Pageable page) {
+    public Page<Product> getAllProducts(Pageable page) {
         return this.productRepository.findAll(page);
     }
 
-    public Page<Product> getAllProducts(Pageable page, String name) {
-        return this.productRepository.findAll(this.nameLike(name), page);
+    public Page<Product> getAllProductsWithSpec(Pageable page, String name) {
+        return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
     }
 
     public Product getProductById(long id) {
