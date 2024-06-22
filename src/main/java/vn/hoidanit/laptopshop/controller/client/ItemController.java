@@ -141,7 +141,7 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model,ProductCriteriaDTO productCriteriaDTO) {
+    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO) {
         int page = 1;
         try {
             if (productCriteriaDTO.getPage().isPresent()) {
@@ -156,41 +156,9 @@ public class ItemController {
         }
 
         Pageable pageable = PageRequest.of(page - 1, 60);
-        Page<Product> prs = this.productService.getAllProducts(pageable);
-
-//        String name = nameOptional.isPresent() ? nameOptional.get() : "";
-//        Page<Product> prs = this.productService.getAllProductsWithSpec(pageable, name);
-
-        // case 1
-//         double min = minOptional.isPresent() ? Double.parseDouble(minOptional.get()) : 0;
-//         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, min);
-
-        // case 2
-        // double max = maxOptional.isPresent() ? Double.parseDouble(maxOptional.get())
-        // : 0;
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, max);
-
-        // case 3
-        // String factory = factoryOptional.isPresent() ? factoryOptional.get() : "";
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-        // factory);
-
-        // case 4
-        // List<String> factory = Arrays.asList(factoryOptional.get().split(","));
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-        // factory);
-
-        // case 5
-        // String price = priceOptional.isPresent() ? priceOptional.get() : "";
-        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-        // price);
-
-        // case 6
-//         List<String> price = Arrays.asList(priceOptional.get().split(","));
-//         Page<Product> prs = this.productService.fetchProductsWithSpec(pageable,
-//         price);
-
-        List<Product> products = prs.getContent();
+        Page<Product> prs = this.productService.getAllProductsWithSpec(pageable, productCriteriaDTO);
+        List<Product> products = prs.getContent().size() > 0 ? prs.getContent()
+                : new ArrayList<Product>();
 
         model.addAttribute("products", products);
         model.addAttribute("currentPage", page);
