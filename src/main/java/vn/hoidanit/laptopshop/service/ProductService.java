@@ -46,7 +46,7 @@ public class ProductService {
             return this.productRepository.findAll(page);
         }
 
-        Specification<Product> combinedSpec = Specification.where(null);
+        Specification<Product> combinedSpec = Specification.where(null); // Khởi tạo biến combinedSpec với giá trị null
 
         if (productCriteriaDTO.getTarget() != null && productCriteriaDTO.getTarget().isPresent()) {
             Specification<Product> currentSpecs = ProductSpecs.matchListTarget(productCriteriaDTO.getTarget().get());
@@ -68,7 +68,7 @@ public class ProductService {
 
     // case 6
     public Specification<Product> buildPriceSpecification(List<String> price) {
-        Specification<Product> combinedSpec = (root, query, criteriaBuilder) -> criteriaBuilder.disjunction();
+        Specification<Product> combinedSpec = Specification.where(null); // disconjunction
         for (String p : price) {
             double min = 0;
             double max = 0;
