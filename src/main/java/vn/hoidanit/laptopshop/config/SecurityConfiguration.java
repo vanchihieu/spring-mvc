@@ -63,7 +63,7 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll() // FORWARD: là khi chuyển hướng sang view jsp nó sẽ cho phép truy cập, INCLUDE: là khi include 1 view jsp vào view khác nó sẽ cho phép truy cập (ví dụ: detail, footer)
-                        .requestMatchers("/", "/login", "/register", "/product/**",
+                        .requestMatchers("/", "/login", "/register", "/product/**", "/products/**",
                                 "/client/**", "/css/**", "/js/**",
                                 "/images/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN") // tại vì dùng hasRole("ADMIN") nên spring sẻ bỏ chữ ROLE
